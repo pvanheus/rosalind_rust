@@ -19,7 +19,7 @@ extern crate clap;
 
 use clap::{App, Arg};
 use std::fs::File;
-use std::io::{BufRead, BufReader, Error};
+use std::io::{BufRead, BufReader};
 use std::process::exit;
 
 use project_rosalind::rosalind::*;
@@ -51,9 +51,13 @@ fn main() {
                 let filename = args.value_of("ARGS").unwrap();
                 let lines = safe_open(filename)
                     .lines()
-                    .collect::<Vec<Result<String, Error>>>();
-                let dna = lines[0].as_ref().unwrap().as_bytes();
-                let pattern = lines[1].as_ref().unwrap().as_bytes();
+                    .map(|l| match l {
+                        Ok(l) => l,
+                        Err(e) => panic!("Failed to read from {}: {}", filename, e),
+                    })
+                    .collect::<Vec<String>>();
+                let dna = lines[0].as_ref();
+                let pattern = lines[1].as_ref();
                 let result = ba1a(dna, pattern);
                 println!("{}", result);
             }

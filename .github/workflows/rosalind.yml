@@ -1,0 +1,18 @@
+name: Rust Example
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: trilom/file-changes-action@v1.2.3
+        with:
+          fileOutput: ' '
+      - name: check which files have changed
+        run: cat $HOME/files.txt
+      - uses: icepuma/rust-action@master
+        with:
+          args: cargo fmt -- --check && cargo clippy -- -Dwarnings && cargo test

@@ -15,17 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 pub mod rosalind {
-    pub fn ba1a(dna: &[u8], pattern: &[u8]) -> i32 {
-        let k = pattern.len();
-        dna.windows(k).filter(|&kmer| kmer == pattern).count() as i32
-    }
+    mod ba1a;
+
+    pub use ba1a::*;
 }
 
 #[cfg(test)]
 mod rosalind_test {
-    use super::rosalind::*;
+    use crate::rosalind::*;
 
     #[test]
     fn test_ba1a_1() {
