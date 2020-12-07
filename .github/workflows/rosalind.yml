@@ -12,9 +12,7 @@ jobs:
         with:
           fileOutput: ' '
       - name: check which files have changed
-        run: |
-          for filename in cat $HOME/files.txt ; do
-            echo
+        run: cat $HOME/files.txt
       - uses: icepuma/rust-action@master
         with:
           args: |
