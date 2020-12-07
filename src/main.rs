@@ -77,6 +77,25 @@ fn main() {
                 let result = ba1b(dna, k).join(" ");
                 println!("{}", result);
             }
+            "ba1c" => {
+                let filename = args.value_of("ARGS").unwrap();
+                let lines = get_lines(filename);
+                let dna = lines[0].as_ref();
+                let result = ba1c(dna);
+                println!("{}", result);
+            }
+            "ba1d" => {
+                let filename = args.value_of("ARGS").unwrap();
+                let lines = get_lines(filename);
+                let pattern = lines[0].as_ref();
+                let dna = lines[1].as_ref();
+                let result = ba1d(dna, pattern)
+                    .iter()
+                    .map(|i| i.to_string())
+                    .collect::<Vec<String>>()
+                    .join(" ");
+                println!("{}", result);
+            }
             _ => eprintln!("ERROR: Unknown problem: {}", problem),
         },
         None => eprintln!("ERROR: You must specify a problem to work on"),

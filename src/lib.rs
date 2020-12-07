@@ -18,9 +18,13 @@
 pub mod rosalind {
     mod ba1a;
     mod ba1b;
+    mod ba1c;
+    mod ba1d;
 
     pub use ba1a::*;
     pub use ba1b::*;
+    pub use ba1c::*;
+    pub use ba1d::*;
 }
 
 #[cfg(test)]
@@ -39,5 +43,20 @@ mod rosalind_test {
         let dna = "ACGTTGCATGTCGCATGATGCATGAGAGCT";
         let k = 4;
         assert_eq!(ba1b(dna, k), vec!["CATG", "GCAT"]);
+    }
+
+    #[test]
+    fn test_ba1c_1() {
+        let dna = "AAAACCCGGT";
+        let complementary_dna = "ACCGGGTTTT";
+        assert_eq!(ba1c(dna), complementary_dna);
+    }
+
+    #[test]
+    fn test_ba1d_1() {
+        let dna = "GATATATGCATATACTT";
+        let pattern = "ATAT";
+        let result = vec![1, 3, 9];
+        assert_eq!(ba1d(dna, pattern), result);
     }
 }
