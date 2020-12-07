@@ -12,7 +12,13 @@ jobs:
         with:
           fileOutput: ' '
       - name: check which files have changed
-        run: cat $HOME/files.txt
+        run: |
+          for filename in cat $HOME/files.txt ; do
+            echo
       - uses: icepuma/rust-action@master
         with:
-          args: cargo fmt -- --check && cargo clippy -- -Dwarnings && cargo test
+          args: |
+            cargo fmt -- --check && cargo clippy -- -Dwarnings &&
+            TESTS=($(for filename in $(cat $HOME/files.txt) ; do if echo $filename | grep src/rosalind >/dev/null ; then echo $filename | sed 's^src/rosalind/^^' | sed 's/.rs$//' ; fi ; done))
+            if [ ${#TESTS[@]} -gt 0 ] ; then cargo test ${TESTS[@]} ; fi
+
