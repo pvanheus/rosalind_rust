@@ -34,6 +34,20 @@ fn safe_open(filename: &str) -> BufReader<File> {
     })
 }
 
+fn get_lines(filename: &str) -> Vec<String> {
+    let reader = safe_open(filename);
+    reader
+        .lines()
+        .map(|l| match l {
+            Ok(line) => line,
+            Err(e) => {
+                eprintln!("Failed to read from {} : {}", filename, e);
+                exit(1);
+            }
+        })
+        .collect()
+}
+
 fn main() {
     let args = App::new("Project Rosalind")
         .version("0.1")
@@ -49,16 +63,18 @@ fn main() {
         Some(problem) => match problem {
             "ba1a" => {
                 let filename = args.value_of("ARGS").unwrap();
-                let lines = safe_open(filename)
-                    .lines()
-                    .map(|l| match l {
-                        Ok(l) => l,
-                        Err(e) => panic!("Failed to read from {}: {}", filename, e),
-                    })
-                    .collect::<Vec<String>>();
+                let lines = get_lines(filename);
                 let dna = lines[0].as_ref();
                 let pattern = lines[1].as_ref();
                 let result = ba1a(dna, pattern);
+                println!("{}", result);
+            }
+            "ba1b" => {
+                let filename = args.value_of("ARGS").unwrap();
+                let lines = get_lines(filename);
+                let dna = lines[0].as_ref();
+                let k = lines[1].parse::<usize>().unwrap();
+                let result = ba1b(dna, k).join(" ");
                 println!("{}", result);
             }
             _ => eprintln!("ERROR: Unknown problem: {}", problem),

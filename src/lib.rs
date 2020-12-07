@@ -17,8 +17,10 @@
 
 pub mod rosalind {
     mod ba1a;
+    mod ba1b;
 
     pub use ba1a::*;
+    pub use ba1b::*;
 }
 
 #[cfg(test)]
@@ -30,5 +32,12 @@ mod rosalind_test {
         let dna = b"GCGCG";
         let pattern = b"GCG";
         assert_eq!(ba1a(dna, pattern), 2);
+    }
+
+    #[test]
+    fn test_ba1b_1() {
+        let dna = "ACGTTGCATGTCGCATGATGCATGAGAGCT";
+        let k = 4;
+        assert_eq!(ba1b(dna, k), vec!["CATG", "GCAT"]);
     }
 }
