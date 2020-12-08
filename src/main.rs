@@ -96,6 +96,17 @@ fn main() {
                     .join(" ");
                 println!("{}", result);
             }
+            "ba1e" => {
+                let filename = args.value_of("ARGS").unwrap();
+                let lines = get_lines(filename);
+                let dna = lines[0].as_ref();
+                let spec = lines[1].split(|c| c == ' ').collect::<Vec<&str>>();
+                let kmer_length = spec[0].parse::<usize>().unwrap();
+                let window_size = spec[1].parse::<usize>().unwrap();
+                let t = spec[2].parse::<i32>().unwrap();
+                let result = ba1e(dna, kmer_length, window_size, t).join(" ");
+                println!("{}", result);
+            }
             _ => eprintln!("ERROR: Unknown problem: {}", problem),
         },
         None => eprintln!("ERROR: You must specify a problem to work on"),

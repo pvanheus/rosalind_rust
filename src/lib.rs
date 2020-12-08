@@ -20,11 +20,13 @@ pub mod rosalind {
     mod ba1b;
     mod ba1c;
     mod ba1d;
+    mod ba1e;
 
     pub use ba1a::*;
     pub use ba1b::*;
     pub use ba1c::*;
     pub use ba1d::*;
+    pub use ba1e::*;
 }
 
 #[cfg(test)]
@@ -58,5 +60,27 @@ mod rosalind_test {
         let pattern = "ATAT";
         let result = vec![1, 3, 9];
         assert_eq!(ba1d(dna, pattern), result);
+    }
+
+    #[test]
+    fn test_ba1e_1() {
+        let dna = "CGGACTCGACAGATGTGAAGAAATGTGAAGACTGAGTGAAGAGAAGAGGAAACACGACACGACATTGCGACATAATGTACGAATGTAATGTGCCTATGGC";
+        let k = 5;
+        let l = 75;
+        let t = 4;
+        let mut result = vec!["CGACA", "GAAGA", "AATGT"];
+        result.sort();
+        assert_eq!(ba1e(dna, k, l, t), result);
+    }
+
+    fn update(vector: &mut Vec<i32>) {
+        vector.push(2);
+    }
+
+    #[test]
+    fn test_update() {
+        let mut vector = vec![1];
+        update(&mut vector);
+        println!("{:?}", vector);
     }
 }
