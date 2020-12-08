@@ -32,6 +32,7 @@ pub mod rosalind {
 #[cfg(test)]
 mod rosalind_test {
     use crate::rosalind::*;
+    use std::collections::HashMap;
 
     #[test]
     fn test_ba1a_1() {
@@ -71,16 +72,5 @@ mod rosalind_test {
         let mut result = vec!["CGACA", "GAAGA", "AATGT"];
         result.sort();
         assert_eq!(ba1e(dna, k, l, t), result);
-    }
-
-    fn update(vector: &mut Vec<i32>) {
-        vector.push(2);
-    }
-
-    #[test]
-    fn test_update() {
-        let mut vector = vec![1];
-        update(&mut vector);
-        println!("{:?}", vector);
     }
 }
