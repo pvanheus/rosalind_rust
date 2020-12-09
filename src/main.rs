@@ -107,6 +107,17 @@ fn main() {
                 let result = ba1e(dna, kmer_length, window_size, t).join(" ");
                 println!("{}", result);
             }
+            "ba1f" => {
+                let filename = args.value_of("ARGS").unwrap();
+                let lines = get_lines(filename);
+                let dna = lines[0].as_ref();
+                let result = ba1f(dna)
+                    .iter()
+                    .map(|&i| i.to_string())
+                    .collect::<Vec<String>>()
+                    .join(" ");
+                println!("{}", result);
+            }
             _ => eprintln!("ERROR: Unknown problem: {}", problem),
         },
         None => eprintln!("ERROR: You must specify a problem to work on"),

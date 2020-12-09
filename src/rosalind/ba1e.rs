@@ -1,6 +1,11 @@
 use std::collections::{HashMap, HashSet};
 
-fn update<'a>(common_words: &mut HashSet<&'a [u8]>, word_frequency: &mut HashMap<&'a [u8], i32>, word: &'a [u8], t: i32) {
+fn update<'a>(
+    common_words: &mut HashSet<&'a [u8]>,
+    word_frequency: &mut HashMap<&'a [u8], i32>,
+    word: &'a [u8],
+    t: i32,
+) {
     if !common_words.contains(word) {
         let count = *(word_frequency.get(word).unwrap_or(&0)) + 1;
         word_frequency.insert(&word, count);

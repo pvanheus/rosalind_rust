@@ -21,18 +21,19 @@ pub mod rosalind {
     mod ba1c;
     mod ba1d;
     mod ba1e;
+    mod ba1f;
 
     pub use ba1a::*;
     pub use ba1b::*;
     pub use ba1c::*;
     pub use ba1d::*;
     pub use ba1e::*;
+    pub use ba1f::*;
 }
 
 #[cfg(test)]
 mod rosalind_test {
     use crate::rosalind::*;
-    use std::collections::HashMap;
 
     #[test]
     fn test_ba1a_1() {
@@ -72,5 +73,37 @@ mod rosalind_test {
         let mut result = vec!["CGACA", "GAAGA", "AATGT"];
         result.sort();
         assert_eq!(ba1e(dna, k, l, t), result);
+    }
+
+    #[test]
+    fn test_ba1f_1() {
+        let dna = "CCTATCGGTGGATTAGCATGTCCCTGTACGTTTCGCCGCGAACTAGTTCACACGGCTTGATGGCAAATGGTTTTTCCGGCGACCGTAATCGTCCACCGAG";
+        let output = vec![53 as usize, 97];
+        let result = ba1f(dna);
+        assert_eq!(result, output);
+    }
+
+    #[test]
+    fn test_ba1f_2() {
+        let dna = "GGGGG";
+        let output = vec![0 as usize];
+        let result = ba1f(dna);
+        assert_eq!(result, output);
+    }
+
+    #[test]
+    fn test_ba1f_3() {
+        let dna = "CCCCC";
+        let output = vec![5 as usize];
+        let result = ba1f(dna);
+        assert_eq!(result, output);
+    }
+
+    #[test]
+    fn test_ba1f_4() {
+        let dna = "GCGC";
+        let output = vec![0 as usize, 2, 4];
+        let result = ba1f(dna);
+        assert_eq!(result, output);
     }
 }
